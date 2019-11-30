@@ -268,4 +268,32 @@ public class dbConnectivity {
         }
         return ret;
     }
+    
+    void addDonor(String name, String proj, int type, int quant){
+        ResultSet rs = null;
+        int fundID = 0;
+        int projID = 0;
+        try {
+            rs = stmt.executeQuery("select top 1 fundID from Funding order by fundID desc");
+            while(rs.next()){
+                fundID = rs.getInt(1);
+            }
+            fundID++;
+            rs = stmt.executeQuery("select projectID from Project where projectName='"+proj+"'");
+            while(rs.next()){
+                projID = rs.getInt(1);
+            }
+            int i=stmt.executeUpdate("insert into Funding (fundID, fundType, fundAmount, projectID) values ("+fundID+","+type+","+quant+","+projID+")");
+            rs = stmt.executeQuery("select top 1 donorID from Donor order by donorID desc");
+            int donorID = 0;
+            while(rs.next()){
+                donorID = rs.getInt(1);
+            }
+            donorID++;
+            String funds = fundID+"";
+            i=stmt.executeUpdate("insert into Donor (donorID, donorName, fundsGiven) values ("+donorID+",'"+name+"','"+funds+"')");
+        } catch (SQLException ex) {
+            Logger.getLogger(dbConnectivity.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 } 

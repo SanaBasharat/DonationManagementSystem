@@ -85,5 +85,11 @@ public class Controller {
         con.closeConnection();
         return r;
     }
+    
+    public void addDonor(String n, String p, int type, int quant){
+        dbConnectivity con = new dbConnectivity();
+        con.addDonor(n, p, type, quant);
+        con.closeConnection();
+    }
 }
 
