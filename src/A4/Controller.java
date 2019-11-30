@@ -13,7 +13,7 @@ import java.util.List;
  */
 public class Controller {
     
-    public void addProject(String n, String d, String m, int b){
+    public void addProject(String n, String d, int b){
         dbConnectivity con = new dbConnectivity();
         con.addProject(n, d, b);
         con.closeConnection();
@@ -45,10 +45,45 @@ public class Controller {
         con.closeConnection();
     }
     
-    public void addProject(String n,String d, int b){
+    public void removeTeamMember(String name, String proj){
         dbConnectivity con = new dbConnectivity();
-        con.addProject(n, d, b);
+        con.removeTM(name, proj);
         con.closeConnection();
+    }
+    
+    public List<String> getProjects(){
+        dbConnectivity con = new dbConnectivity();
+        List<String> r = con.getProjects();
+        con.closeConnection();
+        return r;
+    }
+    
+    public String getDesc(String name){
+        dbConnectivity con = new dbConnectivity();
+        String r = con.getDesc(name);
+        con.closeConnection();
+        return r;
+    }
+    
+    public String getPM(String proj){
+        dbConnectivity con = new dbConnectivity();
+        String r = con.getPM(proj);
+        con.closeConnection();
+        return r;
+    }
+    
+    public String searchPMName(String n){
+        dbConnectivity con = new dbConnectivity();
+        String r = con.searchPMName(n);
+        con.closeConnection();
+        return r;
+    }
+    
+    public Boolean isProj(String n){
+        dbConnectivity con = new dbConnectivity();
+        Boolean r = con.isProj(n);
+        con.closeConnection();
+        return r;
     }
 }
 

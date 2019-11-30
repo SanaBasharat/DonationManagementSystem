@@ -186,10 +186,9 @@ public class AddProject extends javax.swing.JFrame {
         Controller c = new Controller();
         name = jTextField1.getText();
         desc = jTextField2.getText();
-        man = jTextField3.getText();
         budget = jTextField4.getText();
         b = Integer.parseInt(budget);
-        c.addProject(name, desc, man, b);
+        c.addProject(name, desc, b);
         dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
 
@@ -207,7 +206,7 @@ public class AddProject extends javax.swing.JFrame {
         c.addProject(name, desc, b);
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new AllocateTeam(name).setVisible(true);
+                new AllocateTeam(name,1).setVisible(true);
             }
         });
     }//GEN-LAST:event_jButton3MouseClicked

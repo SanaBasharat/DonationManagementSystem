@@ -160,5 +160,112 @@ public class dbConnectivity {
             System.out.println(e);
         }
     }
-
+    
+    void removeTM(String name, String proj){
+        ResultSet rs = null;
+        String temp = null;
+        String temp1 = null;
+        try
+        {
+            rs = stmt.executeQuery("select team from project where projectName='"+proj+"'");
+            while(rs.next()){
+                temp = rs.getString(1);
+            }
+            if (temp != null){
+                int i = temp.indexOf(name);
+                int l = name.length();
+                i+=l;
+                if (temp.charAt(i)==','){
+                    name = name.concat(",");
+                }
+                temp = temp.replace(name, "");
+            }
+            int i=stmt.executeUpdate("update project set team='"+temp+"' where projectName='"+proj+"'");
+        }
+        catch(Exception e)
+        {
+            System.out.println(e);
+        }
+    }
+    
+    List<String> getProjects(){
+        ResultSet rs = null;
+        List<String> proj = new ArrayList<String>();
+        String temp = null;
+        try {
+            rs = stmt.executeQuery("select projectName from Project");
+            int i = 1;
+            while(rs.next()){
+                temp = rs.getString(i);
+                proj.add(temp);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(dbConnectivity.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return proj;
+    }
+    
+    String getDesc(String name){
+        ResultSet rs = null;
+        String desc = null;
+        try {
+            rs = stmt.executeQuery("select projectDescription from Project where projectName='"+name+"'");
+            int i = 1;
+            while(rs.next()){
+                desc = rs.getString(i);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(dbConnectivity.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return desc;
+    }
+    
+    String getPM(String proj){
+        ResultSet rs = null;
+        String temp = null;
+        try {
+            rs = stmt.executeQuery("select projectManager from Project where projectName='"+proj+"'");
+            int i = 1;
+            while(rs.next()){
+                temp = rs.getString(i);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(dbConnectivity.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return temp;
+    }
+    
+    String searchPMName(String name){
+        ResultSet rs = null;
+        String temp = null;
+        try {
+            rs = stmt.executeQuery("select projectName from Project where projectManager='"+name+"'");
+            int i = 1;
+            while(rs.next()){
+                temp = rs.getString(i);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(dbConnectivity.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return temp;
+    }
+    
+    Boolean isProj(String name){
+        ResultSet rs = null;
+        String temp = null;
+        Boolean ret = true;
+        try {
+            rs = stmt.executeQuery("select count(projectName) from Project where projectName='"+name+"'");
+            int i = 1;
+            while(rs.next()){
+                temp = rs.getString(i);
+            }
+            if (Integer.parseInt(temp) == 0){
+                ret = false;
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(dbConnectivity.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return ret;
+    }
 } 

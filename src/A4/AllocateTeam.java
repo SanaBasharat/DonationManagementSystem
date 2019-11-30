@@ -18,16 +18,22 @@ public class AllocateTeam extends javax.swing.JFrame {
     /**
      * Creates new form AllocateTeam
      */
-    public AllocateTeam(String name) {
-        initComponents();
+    public AllocateTeam(String name, int where) {       //0 means it came from OneProject
+        initComponents();                               //1 means it came from AddProject
         projname = name;
         Controller con = new Controller();
         names = con.getVolunteers();
         javax.swing.JList<String> temp = new javax.swing.JList(names.toArray());
         jList2 = temp;
         jScrollPane2.setViewportView(jList2);
-        
-        //team = con.getTeam(projname);
+        if (where == 0){
+            teamnames = con.getTeam(projname);
+            javax.swing.JList<String> temp1 = new javax.swing.JList(teamnames.toArray());
+            jList1 = temp1;
+            jScrollPane1.setViewportView(jList1);
+            String pm = con.getPM(projname);
+            jTextField1.setText(pm);
+        }
     }
 
     /**
@@ -39,8 +45,6 @@ public class AllocateTeam extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel2 = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jList1 = new javax.swing.JList<>();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -52,23 +56,24 @@ public class AllocateTeam extends javax.swing.JFrame {
         jButton4 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jTextField1 = new javax.swing.JTextField();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(204, 204, 204));
         setResizable(false);
         setSize(new java.awt.Dimension(600, 400));
 
-        jLabel2.setFont(new java.awt.Font("Cambria", 1, 24)); // NOI18N
-        jLabel2.setText("Donations Management System");
-
-        jLabel1.setFont(new java.awt.Font("Cambria", 1, 18)); // NOI18N
-        jLabel1.setText("Allocate Team");
-
         jScrollPane1.setViewportView(jList1);
 
         jScrollPane2.setViewportView(jList2);
 
         jButton1.setText("<<<<<");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jLabel3.setText("Volunteers");
 
@@ -112,6 +117,11 @@ public class AllocateTeam extends javax.swing.JFrame {
             }
         });
 
+        jLabel5.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        jLabel5.setText("Allocate Team");
+
+        jLabel1.setText("Project Manager:");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -133,34 +143,28 @@ public class AllocateTeam extends javax.swing.JFrame {
                 .addComponent(jLabel4)
                 .addGap(164, 164, 164))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(211, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel1)
-                                .addGap(116, 116, 116))
-                            .addComponent(jLabel2))
-                        .addGap(124, 124, 124))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(jButton4)
                         .addGap(27, 27, 27))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jTextField1))
-                        .addGap(81, 81, 81))))
+                        .addGap(81, 81, 81))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(209, 209, 209))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel1)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(19, 19, 19)
+                        .addGap(88, 88, 88)
                         .addComponent(jLabel3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -171,15 +175,19 @@ public class AllocateTeam extends javax.swing.JFrame {
                                 .addComponent(jButton1)
                                 .addGap(24, 24, 24))))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(21, 21, 21)
+                        .addContainerGap()
+                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(31, 31, 31)
                         .addComponent(jLabel4)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jButton3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 13, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
                 .addComponent(jButton4)
                 .addGap(26, 26, 26))
         );
@@ -219,6 +227,17 @@ public class AllocateTeam extends javax.swing.JFrame {
         // TODO add your handling code here:
         dispose();
     }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        String s = jList1.getSelectedValue();
+        Controller con = new Controller();
+        con.removeTeamMember(s,projname);
+        teamnames = con.getTeam(projname);
+        javax.swing.JList<String> temp = new javax.swing.JList(teamnames.toArray());
+        jList1 = temp;
+        jScrollPane1.setViewportView(jList1);
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -261,9 +280,9 @@ public class AllocateTeam extends javax.swing.JFrame {
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JList<String> jList1;
     private javax.swing.JList<String> jList2;
     private javax.swing.JScrollPane jScrollPane1;
