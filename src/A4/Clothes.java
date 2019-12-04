@@ -10,14 +10,19 @@ package A4;
  * @author hp
  */
 public class Clothes extends Funding{
-
+    int quant;
     
-    
+    Clothes(int q){
+        quant = q;
+    }
     @Override
     void display()
     {
-        System.out.println("Donation : Clothes");
+        System.out.println(quant+" Clothes");
     }
     
-    
+    @Override
+    int getMember(){
+        return quant;
+    }
 }

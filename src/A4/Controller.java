@@ -91,5 +91,38 @@ public class Controller {
         con.addDonor(n, p, type, quant);
         con.closeConnection();
     }
+    
+    public void addApplicant (String p, Beneficiary b){
+        dbConnectivity con = new dbConnectivity();
+        con.addApplicant(p, b);
+        con.closeConnection();
+    }
+    
+    public List<Beneficiary> getApplicants (String p){
+        dbConnectivity con = new dbConnectivity();
+        List<Beneficiary> b = con.getApplicants(p);
+        con.closeConnection();
+        return b;
+    }
+    
+    public List<Beneficiary> getBeneficiaries (String p){
+        dbConnectivity con = new dbConnectivity();
+        List<Beneficiary> b = con.getBeneficiaries(p);
+        con.closeConnection();
+        return b;
+    }
+    
+    public void setBeneficiaries (Beneficiary b, String proj){
+        dbConnectivity con = new dbConnectivity();
+        con.setBeneficiaries(b, proj);
+        con.closeConnection();
+    }
+    
+    public List<Funding> getProjectFunds (String proj){
+        dbConnectivity con = new dbConnectivity();
+        List<Funding> b = con.getProjectFunds(proj);
+        con.closeConnection();
+        return b;
+    }
 }
 

@@ -10,10 +10,19 @@ package A4;
  * @author hp
  */
 public class FoodItems extends Funding{
+    int quant;
     
+    FoodItems(int q){
+        quant = q;
+    }
     @Override
     void display()
     {
-        System.out.println("Donation : Food Items");
+        System.out.println(quant+" Food Items");
+    }
+    
+    @Override
+    int getMember(){
+        return quant;
     }
 }

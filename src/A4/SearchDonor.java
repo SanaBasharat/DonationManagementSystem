@@ -158,7 +158,7 @@ public class SearchDonor extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextField4ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-         new VeiwBeneficiary().setVisible(true); 
+         //new VeiwBeneficiary().setVisible(true); 
     }//GEN-LAST:event_jButton4ActionPerformed
 
     /**

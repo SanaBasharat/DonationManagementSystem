@@ -19,6 +19,19 @@ public class Beneficiary {
     private String PhoneNo;
     private String Address;
     List<Funding> FundingHistory=new ArrayList<>();
+    
+    public String getDob() {
+        return dob;
+    }
+
+    public String getPhoneNo() {
+        return PhoneNo;
+    }
+
+    public String getAddress() {
+        return Address;
+    }
+    
 
     public Beneficiary(String Name, String dob, int income, String PhoneNo, String Address) {
         this.Name = Name;
