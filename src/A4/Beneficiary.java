@@ -13,6 +13,26 @@ import java.util.List;
  * @author hp
  */
 public class Beneficiary {
+
+    public void setName(String Name) {
+        this.Name = Name;
+    }
+
+    public void setDob(String dob) {
+        this.dob = dob;
+    }
+
+    public void setIncome(int income) {
+        this.income = income;
+    }
+
+    public void setPhoneNo(String PhoneNo) {
+        this.PhoneNo = PhoneNo;
+    }
+
+    public void setAddress(String Address) {
+        this.Address = Address;
+    }
     private String Name;
     private String dob;
     private int income;
@@ -32,7 +52,9 @@ public class Beneficiary {
         return Address;
     }
     
-
+    public Beneficiary(){
+        
+    }
     public Beneficiary(String Name, String dob, int income, String PhoneNo, String Address) {
         this.Name = Name;
         this.dob = dob;

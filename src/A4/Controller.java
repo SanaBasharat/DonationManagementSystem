@@ -158,5 +158,33 @@ public class Controller {
         con.closeConnection();
         return b;
     }
+    
+    public List<Beneficiary> getAllBeneficiaries(){
+        dbConnectivity con = new dbConnectivity();
+        List<Beneficiary> b = con.getAllBeneficiaries();
+        con.closeConnection();
+        return b;
+    }
+    
+    public List<Integer> getBenDetails(Beneficiary ben){
+        dbConnectivity con = new dbConnectivity();
+        List<Integer> b = con.getBenDetails(ben);
+        con.closeConnection();
+        return b;
+    }
+    
+    public List<String> getBenProjects(Beneficiary ben){
+        dbConnectivity con = new dbConnectivity();
+        List<String> b = con.getBenProjects(ben);
+        con.closeConnection();
+        return b;
+    }
+    
+    public String searchDonorName(String name){
+        dbConnectivity con = new dbConnectivity();
+        String b = con.searchDonorName(name);
+        con.closeConnection();
+        return b;
+    }
 }
 

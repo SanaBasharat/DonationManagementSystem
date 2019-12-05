@@ -584,5 +584,83 @@ public class dbConnectivity {
         }
         return proj;
     }
+    
+    List<Beneficiary> getAllBeneficiaries(){
+        ResultSet rs = null;
+        List<Beneficiary> ben = new ArrayList<Beneficiary>();
+        String temp = null;
+        try {
+            rs = stmt.executeQuery("select * from Beneficiary");
+            while(rs.next()){
+                Beneficiary b = new Beneficiary();
+                b.setName(rs.getString(2));
+                b.setAddress(rs.getString(3));
+                b.setPhoneNo(rs.getString(4));
+                b.setDob(rs.getString(5));
+                b.setIncome(Integer.parseInt(rs.getString(6)));
+                ben.add(b);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(dbConnectivity.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return ben;
+    }
+    
+    List<Integer> getBenDetails(Beneficiary b){
+        ResultSet rs = null;
+        int type = 0, amount = 0;
+        int cash = 0, clothes = 0, food = 0;
+        List<Integer> ret = new ArrayList<>();
+        try {
+            rs = stmt.executeQuery("select cash from FundsIssued join Beneficiary on FundsIssued.BeneficiaryID=Beneficiary.BeneficiaryID where Beneficiary.BeneficiaryName='"+b.getName()+"'");
+            while(rs.next()){
+                cash+=rs.getInt(1);
+            }
+            rs = stmt.executeQuery("select clothes from FundsIssued join Beneficiary on FundsIssued.BeneficiaryID=Beneficiary.BeneficiaryID where Beneficiary.BeneficiaryName='"+b.getName()+"'");
+            while(rs.next()){
+                food+=rs.getInt(1);
+            }
+            rs = stmt.executeQuery("select food from FundsIssued join Beneficiary on FundsIssued.BeneficiaryID=Beneficiary.BeneficiaryID where Beneficiary.BeneficiaryName='"+b.getName()+"'");
+            while(rs.next()){
+                clothes+=rs.getInt(1);
+            }
+            ret.add(cash);
+            ret.add(clothes);
+            ret.add(food);
+        } catch (SQLException ex) {
+            Logger.getLogger(dbConnectivity.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return ret;
+    }
+    
+    List<String> getBenProjects(Beneficiary b){
+        ResultSet rs = null;
+        List<String> proj = new ArrayList<String>();
+        String temp = null;
+        try {
+            rs = stmt.executeQuery("select projectName from (select projectID from FundsIssued join Beneficiary on Beneficiary.BeneficiaryID=FundsIssued.BeneficiaryID where BeneficiaryName='"+b.getName()+"') as t1 join Project on Project.projectID=t1.projectID");
+            while(rs.next()){
+                temp = rs.getString(1);
+                proj.add(temp);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(dbConnectivity.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return proj;
+    }
+    
+    String searchDonorName(String name){
+        ResultSet rs = null;
+        String temp = null;
+        try {
+            rs = stmt.executeQuery("select donorName from Donor where donorName='"+name+"'");
+            while(rs.next()){
+                temp = rs.getString(1);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(dbConnectivity.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return temp;
+    }
 }
 
