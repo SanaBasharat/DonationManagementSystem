@@ -313,7 +313,7 @@ public class dbConnectivity {
                 }
             }
             benID++;
-            int i=stmt.executeUpdate("insert into Beneficiary (BeneficiaryID,BeneficiaryName,BeneficiaryAddress,BeneficiaryPhone,BeneficiaryDOB,BeneficiaryIncome,cashIssued,clothesIssued,foodIssued) values ("+benID+",'"+b.getName()+"','"+b.getAddress()+"','"+b.getPhoneNo()+"','"+b.getDob()+"',"+b.getIncome()+"0,0,0)");
+            int i=stmt.executeUpdate("insert into Beneficiary (BeneficiaryID,BeneficiaryName,BeneficiaryAddress,BeneficiaryPhone,BeneficiaryDOB,BeneficiaryIncome) values ("+benID+",'"+b.getName()+"','"+b.getAddress()+"','"+b.getPhoneNo()+"','"+b.getDob()+"',"+b.getIncome()+")");
             rs = stmt.executeQuery("select applicants from Project where projectName='"+p+"'");
             String temp = null;
             while(rs.next()){
@@ -474,6 +474,115 @@ public class dbConnectivity {
             Logger.getLogger(dbConnectivity.class.getName()).log(Level.SEVERE, null, ex);
         }
         return funds;
+    }
+    
+    void issueDonation (String name, String projname, int cash, int clothes, int food){
+        ResultSet rs = null;
+        int count = 0;
+        int benID = 0;
+        int projID = 0;
+        int fundID = 0;
+        try {
+            rs = stmt.executeQuery("select count(*) issuedID from FundsIssued");
+            while(rs.next()){
+                count = rs.getInt(1);
+            }
+            if (count!=0){
+                rs = stmt.executeQuery("select top 1 issuedID from FundsIssued order by issuedID desc");
+                while(rs.next()){
+                    fundID = rs.getInt(1);
+                }
+            }
+            fundID++;
+            rs = stmt.executeQuery("select BeneficiaryID from Beneficiary where BeneficiaryName='"+name+"'");
+            rs.next();
+            benID = rs.getInt(1);
+            rs = stmt.executeQuery("select projectID from Project where projectName='"+projname+"'");
+            rs.next();
+            projID = rs.getInt(1);
+            int i=stmt.executeUpdate("insert into FundsIssued (issuedID,BeneficiaryID,projectID,cash,clothes,food) values ("+fundID+",'"+benID+"','"+projID+"','"+cash+"','"+clothes+"',"+food+")");
+        } catch (SQLException ex) {
+            Logger.getLogger(dbConnectivity.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    List<String> getDonorProjects(String name){
+        ResultSet rs = null;
+        List<String> proj = new ArrayList<String>();
+        String temp = null;
+        try {
+            rs = stmt.executeQuery("select projectName from (select * from Funding join Donor on Donor.fundsGiven=Funding.fundID) as t1 join Project on t1.projectID=Project.projectID where t1.donorName='"+name+"'");
+            while(rs.next()){
+                temp = rs.getString(1);
+                proj.add(temp);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(dbConnectivity.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return proj;
+    }
+    
+    List<String> getDonors(){
+        ResultSet rs = null;
+        List<String> proj = new ArrayList<String>();
+        String temp = null;
+        try {
+            rs = stmt.executeQuery("select donorName from Donor");
+            while(rs.next()){
+                temp = rs.getString(1);
+                proj.add(temp);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(dbConnectivity.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return proj;
+    }
+    
+    List<Integer> getDonorDetails(String name){
+        ResultSet rs = null;
+        int type = 0, amount = 0;
+        int cash = 0, clothes = 0, food = 0;
+        List<Integer> ret = new ArrayList<>();
+        try {
+            rs = stmt.executeQuery("select fundtype, fundAmount from Donor join Funding on Donor.fundsGiven=Funding.fundID where donorName='"+name+"'");
+            while(rs.next()){
+                type = rs.getInt(1);
+                amount = rs.getInt(2);
+                
+                if (type == 1){
+                    cash+=amount;
+                }
+                else if (type == 2){
+                    clothes+=amount;
+                }
+                else if (type == 3){
+                    food+=amount;
+                }
+                
+            }
+            ret.add(cash);
+            ret.add(clothes);
+            ret.add(food);
+        } catch (SQLException ex) {
+            Logger.getLogger(dbConnectivity.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return ret;
+    }
+    
+    List<String> getDonorsOfProject(String projname){
+        ResultSet rs = null;
+        List<String> proj = new ArrayList<String>();
+        String temp = null;
+        try {
+            rs = stmt.executeQuery("select donorName from (select * from Donor join Funding on Donor.fundsGiven=Funding.fundID where projectID=(select projectID from Project where projectName='"+projname+"')) as t1 join Project on Project.projectID=t1.projectID");
+            while(rs.next()){
+                temp = rs.getString(1);
+                proj.add(temp);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(dbConnectivity.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return proj;
     }
 }
 

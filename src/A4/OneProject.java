@@ -236,8 +236,7 @@ public class OneProject extends javax.swing.JFrame {
                         .addGap(28, 28, 28)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel11)
-                    .addComponent(jButton6))
-                .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(jButton6)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -300,15 +299,6 @@ public class OneProject extends javax.swing.JFrame {
         });
     }//GEN-LAST:event_jButton2MouseClicked
 
-    private void jButton3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton3MouseClicked
-        // TODO add your handling code here:
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new AllDonors(projname).setVisible(true);
-            }
-        });
-    }//GEN-LAST:event_jButton3MouseClicked
-
     private void jButton4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton4MouseClicked
         // TODO add your handling code here:
         dispose();
@@ -332,10 +322,6 @@ public class OneProject extends javax.swing.JFrame {
         dispose();
     }//GEN-LAST:event_jButton4ActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton3ActionPerformed
-
     private void jButton6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton6MouseClicked
         // TODO add your handling code here:
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -348,6 +334,19 @@ public class OneProject extends javax.swing.JFrame {
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton6ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton3MouseClicked
+        // TODO add your handling code here:
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new AllDonorsProject(projname).setVisible(true);
+            }
+        });
+    }//GEN-LAST:event_jButton3MouseClicked
 
     /**
      * @param args the command line arguments

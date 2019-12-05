@@ -5,6 +5,7 @@
  */
 package A4;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -13,13 +14,25 @@ import java.util.List;
  */
 public class IssueDonation extends javax.swing.JFrame {
     String projname;
+    int cash, clothes, food;
     /**
      * Creates new form IssueDonation
      */
     public IssueDonation(String p) {
         initComponents();
         projname = p;
+        jLabel11.setText(projname);
         displayRemaining();
+        Controller con = new Controller();
+        List<Beneficiary> app = null;
+        app = con.getBeneficiaries(projname);
+        List<String> names = new ArrayList<String>();
+        for (Beneficiary b : app){
+            names.add(b.getName());
+        }
+        javax.swing.JList<String> temp = new javax.swing.JList(names.toArray());
+        jList1 = temp;
+        jScrollPane1.setViewportView(jList1);
     }
 
     /**
@@ -48,6 +61,7 @@ public class IssueDonation extends javax.swing.JFrame {
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -95,6 +109,8 @@ public class IssueDonation extends javax.swing.JFrame {
 
         jLabel10.setText("Food Items");
 
+        jLabel11.setText("Project Name");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -123,32 +139,38 @@ public class IssueDonation extends javax.swing.JFrame {
                         .addComponent(jLabel9)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jLabel10))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                            .addGap(312, 312, 312)
+                            .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(137, 137, 137))
+                        .addGroup(layout.createSequentialGroup()
+                            .addGap(73, 73, 73)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(69, 69, 69))
+                                .addGroup(layout.createSequentialGroup()
+                                    .addGap(82, 82, 82)
+                                    .addComponent(jLabel5)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addGap(13, 13, 13)
+                                    .addComponent(jLabel6)))
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addGap(56, 56, 56)
+                                    .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(layout.createSequentialGroup()
+                                    .addGap(62, 62, 62)
+                                    .addComponent(jLabel7)))))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(73, 73, 73)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(43, 43, 43)
-                                .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(69, 69, 69)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                        .addComponent(jLabel5)
-                                        .addGap(142, 142, 142))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(56, 56, 56)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                            .addComponent(jLabel7)
-                                            .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 239, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(137, 137, 137))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(160, 160, 160)
-                                .addComponent(jLabel6)
-                                .addGap(274, 274, 274)))))
+                        .addGap(321, 321, 321)
+                        .addComponent(jLabel11)))
                 .addContainerGap(130, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -156,7 +178,9 @@ public class IssueDonation extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(28, 28, 28)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(43, 43, 43)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel11)
+                .addGap(30, 30, 30)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(jLabel3)
@@ -168,9 +192,9 @@ public class IssueDonation extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel5)
                             .addComponent(jLabel6)
-                            .addComponent(jLabel7))
+                            .addComponent(jLabel7)
+                            .addComponent(jLabel5))
                         .addGap(32, 32, 32)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -181,7 +205,7 @@ public class IssueDonation extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(38, 38, 38)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 47, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
                 .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -192,13 +216,15 @@ public class IssueDonation extends javax.swing.JFrame {
     void displayRemaining(){
         Controller con = new Controller();
         List<Funding> funds = con.getProjectFunds(projname);
-        int amount = 0, clothes = 0, food = 0;
+        cash = 0;
+        clothes = 0;
+        food = 0;
         if (funds!=null){
             int i = funds.size();
             i--;
             for (int j=0;j<=i;j++){
                 if (funds.get(j).getClass()==Cash.class){
-                    amount+=funds.get(j).getMember();
+                    cash+=funds.get(j).getMember();
                 }
                 else if (funds.get(j).getClass()==Clothes.class){
                     clothes+=funds.get(j).getMember();
@@ -208,7 +234,7 @@ public class IssueDonation extends javax.swing.JFrame {
                 }
             }
         }
-        jLabel2.setText(amount+"");
+        jLabel2.setText(cash+"");
         jLabel4.setText(clothes+"");
         jLabel9.setText(food+"");
     }
@@ -224,7 +250,42 @@ public class IssueDonation extends javax.swing.JFrame {
 
     private void jButton3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton3MouseClicked
         // TODO add your handling code here:
-        
+        int cash1 = 0, clothes1 = 0, food1 = 0;
+        Boolean canDonate = true;
+        if (jTextField6.getText()!=null){
+            cash1 = Integer.parseInt(jTextField6.getText());
+            if (cash1>cash){
+                canDonate = false;
+            }
+        }
+        if (!(jTextField1.getText().isEmpty())){
+            clothes1 = Integer.parseInt(jTextField1.getText());
+            if (clothes1>clothes){
+                canDonate = false;
+            }
+        }
+        if (!(jTextField5.getText().isEmpty())){
+            food1 = Integer.parseInt(jTextField5.getText());
+            if (food1>food){
+                canDonate = false;
+            }
+        }
+        if (canDonate){
+            String name = jList1.getSelectedValue();
+            Controller con = new Controller();
+            con.issueDonation(name,projname,cash1,clothes1,food1);
+            cash -= cash1;
+            clothes -= clothes1;
+            food -= food1;
+            jLabel2.setText(cash+"");
+            jLabel4.setText(clothes+"");
+            jLabel9.setText(food+"");
+        }
+         
+        jList1.clearSelection();
+        jTextField6.setText("");
+        jTextField1.setText("");
+        jTextField5.setText("");
     }//GEN-LAST:event_jButton3MouseClicked
 
     /**
@@ -267,6 +328,7 @@ public class IssueDonation extends javax.swing.JFrame {
     private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;

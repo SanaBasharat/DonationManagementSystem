@@ -124,5 +124,39 @@ public class Controller {
         con.closeConnection();
         return b;
     }
+    
+    public void issueDonation(String name, String proj, int cash, int clothes, int food){
+        dbConnectivity con = new dbConnectivity();
+        con.issueDonation(name,proj,cash,clothes,food);
+        con.closeConnection();
+    }
+    
+    public List<String> getDonorProjects(String name){
+        dbConnectivity con = new dbConnectivity();
+        List<String> b = con.getDonorProjects(name);
+        con.closeConnection();
+        return b;
+    }
+    
+    public List<String> getDonors(){
+        dbConnectivity con = new dbConnectivity();
+        List<String> b = con.getDonors();
+        con.closeConnection();
+        return b;
+    }
+    
+    public List<Integer> getDonorDetails(String name){
+        dbConnectivity con = new dbConnectivity();
+        List<Integer> b = con.getDonorDetails(name);
+        con.closeConnection();
+        return b;
+    }
+    
+    public List<String> getDonorsOfProject(String name){
+        dbConnectivity con = new dbConnectivity();
+        List<String> b = con.getDonorsOfProject(name);
+        con.closeConnection();
+        return b;
+    }
 }
 
