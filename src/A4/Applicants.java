@@ -212,11 +212,13 @@ public class Applicants extends javax.swing.JFrame {
         String add = jTextField3.getText();
         String phone = jTextField6.getText();
         String income = jTextField2.getText();
-        int i = Integer.parseInt(income);
-        Controller con = new Controller();
-        Beneficiary b = new Beneficiary (name, dob, i, phone, add);
-        con.addApplicant(projname, b);
-        dispose();
+        if (!name.equals("") && !dob.equals("") && !add.equals("") && !phone.equals("") && !income.equals("")){
+            int i = Integer.parseInt(income);
+            Controller con = new Controller();
+            Beneficiary b = new Beneficiary (name, dob, i, phone, add);
+            con.addApplicant(projname, b);
+            dispose();
+        }
     }//GEN-LAST:event_jButton4MouseClicked
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed

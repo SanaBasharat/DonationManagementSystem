@@ -202,6 +202,7 @@ public class AddProject extends javax.swing.JFrame {
         name = jTextField1.getText();
         desc = jTextField2.getText();
         budget = jTextField4.getText();
+        if (name!=null && desc!=null && budget!=null){
         int b = Integer.parseInt(budget);
         c.addProject(name, desc, b);
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -209,6 +210,7 @@ public class AddProject extends javax.swing.JFrame {
                 new AllocateTeam(name,1).setVisible(true);
             }
         });
+        }
     }//GEN-LAST:event_jButton3MouseClicked
 
     /**

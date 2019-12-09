@@ -193,12 +193,14 @@ public class AllProjects extends javax.swing.JFrame {
         // TODO add your handling code here:
         Controller con = new Controller();
         String s = jTextField1.getText(); 
-        String proj = con.searchPMName(s);
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new OneProject(proj).setVisible(true);
-            }
-        });
+        if (s!=null || s!=""){
+            String proj = con.searchPMName(s);
+            java.awt.EventQueue.invokeLater(new Runnable() {
+                public void run() {
+                    new OneProject(proj).setVisible(true);
+                }
+            });
+        }
     }//GEN-LAST:event_jButton2MouseClicked
 
     /**

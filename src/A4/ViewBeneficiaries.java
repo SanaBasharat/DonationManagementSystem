@@ -169,15 +169,17 @@ public class ViewBeneficiaries extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 String n = jList1.getSelectedValue();
-                int i = 0;
-                Beneficiary ben = null;
-                for (Beneficiary b : app){
-                    if (b.getName().equals(n)){
-                        ben = b;
+                if (n==null){
+                    int i = 0;
+                    Beneficiary ben = null;
+                    for (Beneficiary b : app){
+                        if (b.getName().equals(n)){
+                            ben = b;
+                        }
+                        i++;
                     }
-                    i++;
+                    new OneBeneficiary(ben).setVisible(true);
                 }
-                new OneBeneficiary(ben).setVisible(true);
             }
         });
     }//GEN-LAST:event_jButton1ActionPerformed
